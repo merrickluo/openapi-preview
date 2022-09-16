@@ -1,0 +1,35 @@
+#+title: OpenAPI Preview
+
+Preview OpenAPI(Swagger) definition files in browser.
+
+* Requirements
+This package use [[https://github.com/Redocly/redoc][redoc-cli]] to generate html for current buffer for preview. So you need to install it first, find it in your package manager or install via npm/yarn.
+
+#+begin_src shell
+npm i -g redoc-cli
+#+end_src
+
+* Installation
+** doomemacs
+in =packages.el=
+#+begin_src emacs-lisp
+(package! openapi-preview :recipe (:host github :repo "merrickluo/openapi-preview"))
+#+end_src
+
+in =config.el=
+#+begin_src emacs-lisp
+(use-package! openapi-preview :commands 'openapi-preview)
+#+end_src
+
+** straight.el
+#+begin_src emacs-lisp
+(straight-use-package
+ '(lsp-tailwindcss :type git :host github :repo "merrickluo/openapi-preview"))
+#+end_src
+
+* Usage
++ visit a openapi(swagger) definition file
++ =M-x openapi-preview=
+
+* Reference
++ https://github.com/Nooby/swagger-mode
