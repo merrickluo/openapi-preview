@@ -24,7 +24,7 @@ in =config.el=
 ** straight.el
 #+begin_src emacs-lisp
 (straight-use-package
- '(lsp-tailwindcss :type git :host github :repo "merrickluo/openapi-preview"))
+ '(openapi-preview :type git :host github :repo "merrickluo/openapi-preview"))
 #+end_src
 
 * Usage
