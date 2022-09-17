@@ -23,15 +23,21 @@
   :type 'string
   :group 'openapi-preview)
 
+(defcustom openapi-preview-extra-arguments '("--disableGoogleFont")
+  "Custom arguments provide to redoc-cli."
+  :type '(repeat string)
+  :group 'openapi-preview)
+
 ;;;###autoload
 (defun openapi-preview()
   "Preview openapi definition in default browser."
   (interactive)
   (let* ((buffer "*openapi-preview*")
-         (tmpfile (make-temp-file "openapi-preview" nil ".html")))
+         (tmpfile (make-temp-file "openapi-preview" nil ".html"))
+         (func (apply-partially 'call-process openapi-preview-redoc-command nil buffer t "build" (buffer-file-name) "-o" tmpfile)))
     (if (get-buffer buffer)
         (kill-buffer buffer))
-    (let ((ret (call-process openapi-preview-redoc-command nil buffer t "build" (buffer-file-name) "-o" tmpfile "--disableGoogleFont")))
+    (let ((ret (apply func openapi-preview-extra-arguments)))
       (if (eq ret 0)
           (browse-url (format "file://%s" tmpfile))
         (delete-file tmpfile)
