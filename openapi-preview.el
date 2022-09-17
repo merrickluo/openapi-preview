@@ -31,7 +31,7 @@
          (tmpfile (make-temp-file "openapi-preview" nil ".html")))
     (if (get-buffer buffer)
         (kill-buffer buffer))
-    (let ((ret (call-process openapi-preview-redoc-command nil buffer t "build" (buffer-file-name) "-o" tmpfile)))
+    (let ((ret (call-process openapi-preview-redoc-command nil buffer t "build" (buffer-file-name) "-o" tmpfile "--disableGoogleFont")))
       (if (eq ret 0)
           (browse-url (format "file://%s" tmpfile))
         (delete-file tmpfile)
